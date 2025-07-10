@@ -1,68 +1,477 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* General Body Styles */
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f3f4f6; /* Consistent light gray background */
+    color: #1f2937; /* Dark gray for general text */
+    line-height: 1.5; /* Default line height */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Container for content width */
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
+/* Header Styles */
+.header {
     background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    position: fixed; /* Lock the header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Add padding to body to prevent content from being hidden by fixed header */
+body {
+    padding-top: 60px; /* Adjust based on your header's actual height */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .navbar {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+/* Logo Styling */
+.header-logo {
+    height: 40px;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 767px) {
+    .header-logo {
+        height: 30px;
+    }
+}
+
+/* Hamburger Button and Login Button Container */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Space between hamburger and login button */
+}
+
+/* Hamburger Button */
+.hamburger-button {
+    display: block;
+    color: #4b5563;
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+.hamburger-button:hover {
+    color: #2563eb;
+}
+.hamburger-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #2563eb;
+}
+.hamburger-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* Desktop Navigation (from original template, mostly unused in dashboard header, but kept for mobile logic) */
+.desktop-nav {
+    display: none; /* This will stay hidden as we use navbar-dashboard-links */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.desktop-nav li {
+    display: inline-block;
+    margin-left: 1.5rem;
+}
+
+.desktop-nav a {
+    color: #4b5563;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.desktop-nav a:hover {
+    color: #2563eb;
+}
+
+@media (min-width: 768px) {
+    .desktop-nav {
+        display: flex !important; /* This rule will technically show it, but our dashboard links override its utility */
+        align-items: center;
+    }
+    .hamburger-button {
+        display: none !important;
+    }
+    .nav-controls .btn-login-desktop {
+        display: block; /* Show desktop login button */
+    }
+     .nav-controls .btn-login-mobile {
+        display: none; /* Hide mobile login button */
+    }
+}
+
+/* Mobile Menu */
+#mobile-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    z-index: 999; /* Below the header, but above content */
+    list-style: none;
+    margin: 0;
+}
+
+#mobile-menu li {
+    width: 100%;
+}
+
+#mobile-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    color: #374151;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#mobile-menu a:hover {
+    color: #2563eb;
+}
+
+#mobile-menu li:last-child a {
+    border-bottom: none;
+}
+
+/* Show mobile menu when 'open' class is applied */
+#mobile-menu.open {
+    display: flex;
+}
+
+@media (min-width: 768px) {
+    #mobile-menu {
+        display: none !important;
+    }
+}
+
+/* Common Button Styles */
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    font-weight: 700;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Primary Button (only if you had one in the header, keeping it as a general utility) */
+.btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+/* Secondary Button (only if you had one in the header, keeping it as a general utility) */
+.btn-secondary {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #e5e7eb;
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb;
+}
+
+/* Login Button specific styles (now repurposed for Sign Out) */
+.btn-login {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-login:hover {
+    background-color: #1d4ed8;
+    transform: scale(1.05);
+}
+
+/* Hide desktop login button on mobile */
+.btn-login-desktop {
+    display: none;
+}
+
+/* Show mobile login button on mobile, hide on desktop */
+.btn-login-mobile {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .btn-login-desktop {
+        display: block;
+    }
+    .btn-login-mobile {
+        display: none;
+    }
+}
+
+/* Parallax Image Error Handling (useful if you ever have images) */
+img[onerror="this.onerror=null;this.src='https://placehold.co/300x200/cccccc/333333?text=Image+Error';"] {
+    border: 1px dashed #ccc;
+    background-color: #f0f0f0;
+    display: block;
+    margin: auto;
+}
+
+/* Dashboard Specific Styles (These are crucial for your current dashboard) */
+.dashboard-main {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.timeline-watermark {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    color: #9ca3af; /* Light gray text */
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-height: 400px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #2563eb;
+}
+
+.nav-link.active {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+}
+
+/* Adjusted header for dashboard nav links */
+.header .navbar-dashboard-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Space between "Reviews" and "Automations" */
+}
+
+@media (max-width: 767px) {
+    .header .navbar-dashboard-links {
+        display: none; /* Hide these links on smaller screens */
+    }
+}
+/* Dashboard Main Content Wrapper (added to App.jsx) */
+.dashboard-content {
+    padding-top: 2rem; /* Give some space below the fixed header */
+    padding-bottom: 2rem;
+    min-height: calc(100vh - 60px); /* Ensure content takes up at least viewport height minus header */
+}
+
+/* Automations Page Specific Styles */
+.automations-page {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 800px; /* Limit width for better readability */
+    margin: 0 auto; /* Center the page content */
+}
+
+.automations-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+}
+
+.search-bar-container {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    color: #374151;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.search-button {
+    /* Inherits .btn and .btn-primary styles */
+    padding: 0.75rem 1.5rem; /* Adjust padding for search button */
+    border-radius: 0.5rem; /* Make it match input */
+    font-weight: 600;
+}
+
+.suggested-automations-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+    text-align: left; /* Align heading to left within its container */
+    padding-left: 0.5rem; /* Match padding of automation items */
+}
+
+.suggested-automations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 1rem;
+    text-align: left;
+}
+
+.automation-item {
+    background-color: #f9fafb; /* Lighter background for items */
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    font-size: 1rem;
+    color: #374151;
+    font-weight: 500;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+}
+
+.automation-item:hover {
+    background-color: #eff6ff; /* Light blue on hover */
+    border-color: #2563eb;
+}
+
+/* Ensure the timeline watermark also uses the container */
+.timeline-watermark {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    color: #9ca3af; /* Light gray text */
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-height: 400px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Styles for selected CRM item in the grid */
+.automation-item.selected {
+    background-color: #dbeafe; /* Light blue background for selected item */
+    border-color: #2563eb; /* Blue border for selected item */
+    font-weight: 600;
+}
+
+/* Styles for the container showing the selected CRM and connect button */
+.selected-crm-container {
+    background-color: #e0f2fe; /* Very light blue background */
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #93c5fd; /* Light blue border */
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selected-crm-text {
+    font-size: 1.1rem;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* Styles for connection status message */
+.connection-status {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.connection-status.connected {
+    background-color: #d1fae5; /* Light green */
+    border: 1px solid #34d399; /* Green border */
+    color: #065f46; /* Dark green text */
+}
+
+/* No results message for search */
+.no-results-message {
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 1rem;
+    grid-column: 1 / -1; /* Span across all columns in the grid */
 }
