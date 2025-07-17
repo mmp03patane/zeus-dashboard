@@ -1,0 +1,191 @@
+/* src/components/AutomationsPage.css */
+
+.automations-page {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.automations-page-title {
+    text-align: center;
+    color: #3f51b5; /* A nice blue/purple */
+    margin-bottom: 15px;
+}
+
+.automations-page-description {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.integration-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.integration-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #eee;
+    position: relative;
+}
+
+.integration-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.integration-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.integration-card h3 {
+    color: #424242;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.integration-card p {
+    font-size: 0.95em;
+    color: #666;
+    flex-grow: 1;
+    margin-bottom: 25px;
+}
+
+.connect-button {
+    background-color: #3f51b5; /* Primary blue/purple */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* In case it's rendered as a link */
+    display: inline-block; /* Ensure padding works consistently */
+    width: 100%;
+    max-width: 220px;
+}
+
+.connect-button:hover:not(:disabled) {
+    background-color: #303f9f; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+.connect-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.connect-button.connected {
+    background-color: #4CAF50; /* Green for connected */
+    cursor: default;
+    position: relative;
+    padding-right: 35px; /* Make space for checkmark */
+}
+
+.connect-button.connected:hover {
+    background-color: #4CAF50;
+    transform: none;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 15px; /* Adjust as needed */
+    right: 15px; /* Adjust as needed */
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.connected-status {
+    color: #4CAF50; /* Green checkmark */
+    top: 20px; /* Adjust to align with button */
+    right: 20px; /* Adjust to align with button */
+    font-size: 1.5em; /* Larger checkmark */
+    /* Remove position absolute and adjust padding for button if this is inside */
+}
+
+.integration-card .connected-status {
+    position: static; /* Let it flow normally within the button */
+    margin-left: 10px;
+}
+.connect-button.connected .status-indicator {
+    margin-left: 10px;
+}
+
+.coming-soon {
+    opacity: 0.7;
+    pointer-events: none; /* Disable interactions */
+}
+
+/* Adjust button padding to make space for the checkmark if it's inside */
+.connect-button.connected {
+    padding-right: 15px; /* Reduce padding right if checkmark is inside */
+}
+
+.error-message {
+    color: #d32f2f; /* Red for errors */
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.triggers-section {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    color: #555;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .automations-page {
+        padding: 20px 15px;
+    }
+
+    .integration-cards {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+}
+
+.disconnect-button {
+    background-color: #f44336; /* Red for disconnect */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px; /* Space between connect/status and disconnect */
+    width: 100%;
+    max-width: 220px;
+}
+
+.disconnect-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: translateY(-2px);
+}
